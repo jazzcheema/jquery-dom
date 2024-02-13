@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@5/dist/css/bootstrap.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ratings</title>
+</head>
+
+<body>
+  <form id="movieSubmit">
+    <input type="text" placeholder="Movie Title" id="movieTitle">
+    <input type="text" placeholder="Rating" id="movieRating">
+    <button type="submit"> Submit</button>
+  </form>
+
+  <div class="new-titles">
+
+  </div>
+
+
+</body>
+
+<script src="https://unpkg.com/jquery"></script>
+<script>
+  "use strict";
+
+
+  $("body")
+    .css({
+      "display": "flex",
+      "flex-direction": "column",
+      "align-items": "center",
+      "justify-content": "center",
+      "margin-top": '10px',
+    });  //   .css({"display": "flex", "flex-direction": "column",})
+
+  $("form").on("submit", function () {
+
+    let movieTitle = $("#movieTitle").val();
+    let movieRating = $("#movieRating").val();
+
+    let createMovieElement = $(`
+      <div>
+        <h1> ${movieTitle} | Rating: ${movieRating} Stars </h1>
+        <button> Remove </button>
+      </div>
+        `);
+
+    $(".new-titles").append(createMovieElement);
+
+    $(".new-titles div")
+      .css({
+        "display": "flex",
+        "justify-content": "center",
+        "align-items": "center",
+        "margin": "15px"
+      });
+
+    $(".new-titles button")
+      .css("margin-left", "10px");
+
+    event.preventDefault();
+  });
+
+
+  $(".new-titles").on("click", "button", function (evt) {
+    $(evt.target).parent().remove();
+  })
+
+  /*
+
+  on submit, take two values from form
+  input values onto new header element
+  append header into new-titles div
+  include remove button for each new element
+  make sure remove buttons remove correct element
+
+  */
+</script>
+
+
+</html>
