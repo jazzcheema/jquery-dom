@@ -10,11 +10,16 @@
 
 <body>
   <form id="movieSubmit">
-    <input type="text" placeholder="Movie Title" id="movieTitle">
-    <input type="text" placeholder="Rating" id="movieRating">
+    <input type="text" placeholder="Movie Title" id="movieTitle" minlength="2">
+    <input type="number" id="movieRating" min="0" max="10">
     <button type="submit"> Submit</button>
   </form>
 
+
+  <div class="sort-buttons">
+    <button id="titleSort">Sort by Title</button>
+    <button id="ratingSort">Sort by Rating</button>
+  </div>
   <div class="new-titles">
 
   </div>
@@ -26,6 +31,14 @@
 <script>
   "use strict";
 
+  $(".sort-buttons").css({
+    "display": "flex",
+    "justify-content": "space-between",
+    "margin-top": '10px',
+  });
+
+  $(".sort-buttons button").css("margin", "10px");
+
 
   $("body")
     .css({
@@ -36,6 +49,20 @@
       "margin-top": '10px',
     });  //   .css({"display": "flex", "flex-direction": "column",})
 
+
+
+  $("#titleSort").on("click", function () {
+    let movieTitles = $(".new-titles .title");
+    console.log(movieTitles.length);
+    for (let i = 0; i < movieTitles.length; i++) {
+      console.log(movieTitles.eq(i).text());
+    }
+    // for (let title of movieTitles) {
+    //   console.log(title.text());
+    // }
+  });
+
+
   $("form").on("submit", function () {
 
     let movieTitle = $("#movieTitle").val();
@@ -43,7 +70,7 @@
 
     let createMovieElement = $(`
       <div>
-        <h1> ${movieTitle} | Rating: ${movieRating} Stars </h1>
+        <h1> <span class="title">${movieTitle}</span> | Rating: <span class="rating">${movieRating}</span> Stars </h1>
         <button> Remove </button>
       </div>
         `);
